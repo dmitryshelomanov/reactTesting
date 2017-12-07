@@ -14,4 +14,3 @@ export const mines = (num) => (dispatch) => {
     type: COUNTER_MINES,
   })
 }
-
