@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test component Counter shapshot Counter 1`] = `
+<div
+  className="sc-bdVaJa dvorAs"
+>
+  <div
+    className="sc-htpNat ddEKpF"
+    onClick={[Function]}
+  >
+    +
+  </div>
+  <div
+    className="sc-bwzfXH gweSj"
+  />
+  <div
+    className="sc-htpNat ddEKpF"
+    onClick={[Function]}
+  >
+    -
+  </div>
+</div>
+`;
