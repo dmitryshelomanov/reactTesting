@@ -5,13 +5,18 @@ import Adapter from 'enzyme-adapter-react-16'
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
 import { plus, mines } from '../../redux/actions/counter'
-
 import { Counter } from './index'
 import Actionbtn from '../ui/actionBtn'
-import { COUNTER_PLUS, COUNTER_MINES } from '../../redux/types'
+import * as types from '../../redux/types'
 
 configure({ adapter: new Adapter() })
+
+beforeEach(() => { 
+  const mw = [thunk]
+  global.mockStore = configureStore(mw)
+})
 
 describe('test component Counter', () => {
 
@@ -20,32 +25,34 @@ describe('test component Counter', () => {
   })
 
   it('dispatches plus action', () => {
-    const testFn = sinon.stub()
+    const store = global.mockStore({})
     const wrapper = shallow(
       <Counter
-        onIncCounter={() => plus(1)(testFn)}
+        onIncCounter={() => store.dispatch(plus(1))}
       />
     )
     wrapper.find(Actionbtn).at(0).simulate('click')
-    expect(
-      testFn.calledWith({ payload: 1, type: COUNTER_PLUS })
-    ).toBeTruthy()
+    expect(store.getActions()[0]).toEqual({
+      type: types.COUNTER_PLUS,
+      payload: 1
+    })
   })
 
   it('dispatches mines action', () => {
-    const testFn = sinon.stub()
+    const store = global.mockStore({})
     const wrapper = shallow(
       <Counter
-        onDeincCounter={() => mines(100)(testFn)}
+        onDeincCounter={() => store.dispatch(mines(1))}
       />
     )
     wrapper.find(Actionbtn).at(1).simulate('click')
-    expect(
-      testFn.calledWith({ payload: 100, type: COUNTER_MINES })
-    ).toBeTruthy()
+    expect(store.getActions()[0]).toEqual({
+      type: types.COUNTER_MINES,
+      payload: 1
+    })
   })
 
-  it('shapshot Counter', () => {
+  it.skip('shapshot Counter', () => {
     const tree = renderer
       .create(<Counter />)
       .toJSON()
