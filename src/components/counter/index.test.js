@@ -1,9 +1,7 @@
 import React from 'react'
-import { shallow, render, configure, mount } from 'enzyme'
-import sinon from 'sinon'
+import { shallow, render, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import renderer from 'react-test-renderer';
-import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import { plus, mines } from '../../redux/actions/counter'
