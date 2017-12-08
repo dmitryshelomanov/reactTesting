@@ -52,7 +52,7 @@ describe('test component Counter', () => {
     })
   })
 
-  it.skip('shapshot Counter', () => {
+  it('shapshot Counter', () => {
     const tree = renderer
       .create(<Counter />)
       .toJSON()
